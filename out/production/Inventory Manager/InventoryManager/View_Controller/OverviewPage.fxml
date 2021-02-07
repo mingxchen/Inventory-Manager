@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="582.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InventoryManager.View_Controller.OverviewController">
+   <children>
+      <TableView fx:id="overviewTable" layoutX="32.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="552.0" prefWidth="656.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <columns>
+            <TableColumn fx:id="idColumn" style="-fx-alignment: CENTER;" text="ID" />
+            <TableColumn fx:id="styleColumn" prefWidth="170.0" style="-fx-alignment: CENTER;" text="STYLE" />
+            <TableColumn fx:id="colorColumn" minWidth="0.0" prefWidth="170.0" style="-fx-alignment: CENTER;" text="COLOR" />
+            <TableColumn fx:id="sizeColumn" prefWidth="120.0" style="-fx-alignment: CENTER;" text="SIZE" />
+            <TableColumn fx:id="quantityColumn" onEditCommit="#EditQuantityCell" prefWidth="110.0" style="-fx-alignment: CENTER;" text="QUANTITY" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
