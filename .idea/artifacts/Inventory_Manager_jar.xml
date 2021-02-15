@@ -2,6 +2,9 @@
   <artifact type="jar" name="Inventory Manager:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Inventory_Manager_jar</output-path>
     <root id="archive" name="Inventory Manager.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
       <element id="module-output" name="Inventory Manager" />
       <element id="extracted-dir" path="C:/Program Files/Java/javafx-sdk-11.0.2/lib/javafx-swt.jar" path-in-jar="/" />
       <element id="extracted-dir" path="C:/Program Files/Java/javafx-sdk-11.0.2/lib/javafx.base.jar" path-in-jar="/" />
@@ -11,6 +14,7 @@
       <element id="extracted-dir" path="C:/Program Files/Java/javafx-sdk-11.0.2/lib/javafx.media.jar" path-in-jar="/" />
       <element id="extracted-dir" path="C:/Program Files/Java/javafx-sdk-11.0.2/lib/javafx.swing.jar" path-in-jar="/" />
       <element id="extracted-dir" path="C:/Program Files/Java/javafx-sdk-11.0.2/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.22.jar" path-in-jar="/" />
       <element id="file-copy" path="C:/Program Files/Java/javafx-sdk-11.0.2/bin/api-ms-win-core-console-l1-1-0.dll" />
       <element id="file-copy" path="C:/Program Files/Java/javafx-sdk-11.0.2/bin/api-ms-win-core-datetime-l1-1-0.dll" />
       <element id="file-copy" path="C:/Program Files/Java/javafx-sdk-11.0.2/bin/api-ms-win-core-debug-l1-1-0.dll" />
@@ -67,7 +71,6 @@
       <element id="file-copy" path="C:/Program Files/Java/javafx-sdk-11.0.2/bin/prism_sw.dll" />
       <element id="file-copy" path="C:/Program Files/Java/javafx-sdk-11.0.2/bin/ucrtbase.dll" />
       <element id="file-copy" path="C:/Program Files/Java/javafx-sdk-11.0.2/bin/vcruntime140.dll" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/mysql-connector-java-8.0.22.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

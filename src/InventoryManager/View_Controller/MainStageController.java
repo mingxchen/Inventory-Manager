@@ -3,6 +3,7 @@ package InventoryManager.View_Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
@@ -34,9 +35,8 @@ public class MainStageController {
     @FXML
     void inventoryBtnOnClick(ActionEvent event) throws Exception{
         inventoryActive();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.load(getClass().getResource("InventoryPage.fxml").openStream());
-        borderPane.setCenter(fxmlLoader.getRoot());
+        Parent root = FXMLLoader.load(getClass().getResource("InventoryPage.fxml"));
+        borderPane.setCenter(root);
     }
 
 
@@ -44,27 +44,26 @@ public class MainStageController {
     @FXML
     void OverviewBtnOnClick(ActionEvent event) throws Exception{
         overviewActive();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.load(getClass().getResource("OverviewPage.fxml").openStream());
-        borderPane.setCenter(fxmlLoader.getRoot());
+        Parent root = FXMLLoader.load(getClass().getResource("OverviewPage.fxml"));
+        borderPane.setCenter(root);
     }
+
 
     //Switch to SettingsPage when clicked
     @FXML
     void settingsBtnOnClick(ActionEvent event) throws Exception{
         settingsActive();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.load(getClass().getResource("SettingsPage.fxml").openStream());
-        borderPane.setCenter(fxmlLoader.getRoot());
+        Parent root = FXMLLoader.load(getClass().getResource("SettingsPage.fxml"));
+        borderPane.setCenter(root);
     }
+
 
     //Switch to AboutPage when clicked
     @FXML
     void aboutBtnOnClick(ActionEvent event) throws Exception{
         aboutActive();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.load(getClass().getResource("AboutPage.fxml").openStream());
-        borderPane.setCenter(fxmlLoader.getRoot());
+        Parent root = FXMLLoader.load(getClass().getResource("AboutPage.fxml"));
+        borderPane.setCenter(root);
     }
 
 
