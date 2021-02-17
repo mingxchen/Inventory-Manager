@@ -347,6 +347,10 @@ public class InventoryController{
 
             try {
                 prepStmt.executeUpdate();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("Add Successful!");
+                alert.showAndWait();
             } catch (SQLException e){
                 if(e != null){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -355,6 +359,7 @@ public class InventoryController{
                     alert.showAndWait();
                 }
             }
+
             con.close();
         }
         else{
@@ -387,6 +392,12 @@ public class InventoryController{
                     alert.setContentText("Invalid Edit, Item not in Stock!");
                     alert.showAndWait();
                 }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Edit Successful!");
+                    alert.showAndWait();
+                }
             } catch (SQLException e){
                 if(e != null){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -395,6 +406,7 @@ public class InventoryController{
                     alert.showAndWait();
                 }
             }
+
             con.close();
         }
         else{
@@ -423,9 +435,16 @@ public class InventoryController{
             if ((!(prepStmt.executeUpdate() >= 1))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
-                alert.setContentText("Invalid Delete, Double Check Descriptions!");
+                alert.setContentText("Invalid Delete, Item not in Stock!");
                 alert.showAndWait();
             }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("Delete Successful!");
+                alert.showAndWait();
+            }
+
             con.close();
         }
         else{
@@ -450,9 +469,16 @@ public class InventoryController{
             if ((!(prepStmt.executeUpdate() >= 1))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
-                alert.setContentText("Invalid Delete, Double Check ID!");
+                alert.setContentText("Invalid Delete, No such ID!");
                 alert.showAndWait();
             }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("Delete Successful!");
+                alert.showAndWait();
+            }
+
             con.close();
         }
         else{

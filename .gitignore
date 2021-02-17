@@ -1,5 +1,6 @@
 # DB login info
-database.properties
+db.properties
+local.properties
 
 # Compiled class file
 *.class
