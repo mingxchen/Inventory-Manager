@@ -17,19 +17,24 @@
          <content>
             <AnchorPane>
                <children>
+                  <Label layoutX="20.0" layoutY="31.0" text="Search By Descriptions">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
                   <ComboBox fx:id="styleCombo" editable="true" layoutX="20.0" layoutY="54.0" prefWidth="150.0" promptText="Enter Style" />
                   <ComboBox fx:id="colorCombo" editable="true" layoutX="177.0" layoutY="54.0" prefWidth="150.0" promptText="Enter Color" />
                   <ComboBox fx:id="sizeCombo" editable="true" layoutX="335.0" layoutY="54.0" prefWidth="150.0" promptText="Enter Size" />
-                  <Button fx:id="searchBtn" layoutX="510.0" layoutY="54.0" mnemonicParsing="false" onAction="#searchBtnClick" prefHeight="25.0" prefWidth="74.0" text="Search">
+                  <Button fx:id="searchBtn" layoutX="516.0" layoutY="54.0" mnemonicParsing="false" onAction="#searchBtnClick" prefHeight="25.0" prefWidth="120.0" text="Search">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="clearBtn" layoutX="592.0" layoutY="54.0" mnemonicParsing="false" onAction="#clearBtnClick" prefHeight="25.0" prefWidth="74.0" text="Clear">
+                  <Label layoutX="20.0" layoutY="127.0" text="Search Result">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Italic" size="12.0" />
                      </font>
-                  </Button>
+                  </Label>
                   <TableView fx:id="searchTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="383.0" prefWidth="646.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0">
                      <columns>
                         <TableColumn fx:id="idColumn" prefWidth="70.0" style="-fx-alignment: CENTER;" text="ID" />
@@ -39,16 +44,6 @@
                         <TableColumn fx:id="quantityColumn" onEditCommit="#EditQuantityCell" prefWidth="110.0" style="-fx-alignment: CENTER;" text="QUANTITY" />
                      </columns>
                   </TableView>
-                  <Label layoutX="20.0" layoutY="31.0" text="Search By Description">
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="20.0" layoutY="127.0" text="Search History">
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font>
-                  </Label>
                </children></AnchorPane>
          </content>
       </Tab>
@@ -56,6 +51,11 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
+                  <Label layoutX="31.0" layoutY="63.0" text="Add or Edit Stock By Descriptions">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
                   <ComboBox fx:id="manageStyleCombo" editable="true" layoutX="31.0" layoutY="87.0" prefWidth="150.0" promptText="Enter Style*" />
                   <ComboBox fx:id="manageColorCombo" editable="true" layoutX="188.0" layoutY="87.0" prefWidth="150.0" promptText="Enter Color*" />
                   <ComboBox fx:id="manageSizeCombo" editable="true" layoutX="347.0" layoutY="87.0" prefWidth="150.0" promptText="Enter Size*" />
@@ -70,11 +70,6 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Label layoutX="31.0" layoutY="63.0" text="Add or Edit Stock By Descriptions">
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font>
-                  </Label>
                </children>
             </AnchorPane>
          </content>
@@ -83,7 +78,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="46.0" layoutY="60.0" text="Delete By Description">
+                  <Label layoutX="46.0" layoutY="60.0" text="Delete By Descriptions">
                      <font>
                         <Font name="System Italic" size="12.0" />
                      </font>

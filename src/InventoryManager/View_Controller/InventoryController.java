@@ -24,7 +24,7 @@ public class InventoryController{
     private ComboBox<String> styleCombo, colorCombo, sizeCombo;
 
     @FXML
-    private Button searchBtn, clearBtn;
+    private Button searchBtn;
 
     @FXML
     private TableView<Stock> searchTable;
@@ -86,27 +86,35 @@ public class InventoryController{
     @FXML
     void searchBtnClick(ActionEvent event) throws SQLException{
         if(styleCombo.getEditor().getText().length() != 0 && colorCombo.getEditor().getText().length() != 0 && sizeCombo.getEditor().getText().length() != 0){
+            tableList.clear();
             styleColorSizeSearch();
         }
         else if(styleCombo.getEditor().getText().length() != 0 && colorCombo.getEditor().getText().length() != 0 && sizeCombo.getEditor().getText().length() == 0){
+            tableList.clear();
             styleColorSearch();
         }
         else if(styleCombo.getEditor().getText().length() != 0 && colorCombo.getEditor().getText().length() == 0 && sizeCombo.getEditor().getText().length() != 0){
+            tableList.clear();
             styleSizeSearch();
         }
         else if(styleCombo.getEditor().getText().length() == 0 && colorCombo.getEditor().getText().length() != 0 && sizeCombo.getEditor().getText().length() != 0){
+            tableList.clear();
             colorSizeSearch();
         }
         else if(styleCombo.getEditor().getText().length() != 0 && colorCombo.getEditor().getText().length() == 0 && sizeCombo.getEditor().getText().length() == 0){
+            tableList.clear();
             styleSearch();
         }
         else if(styleCombo.getEditor().getText().length() == 0 && colorCombo.getEditor().getText().length() != 0 && sizeCombo.getEditor().getText().length() == 0){
+            tableList.clear();
             colorSearch();
         }
         else if(styleCombo.getEditor().getText().length() == 0 && colorCombo.getEditor().getText().length() == 0 && sizeCombo.getEditor().getText().length() != 0){
+            tableList.clear();
             sizeSearch();
         }
         else{
+            tableList.clear();
             allSearch();
         }
     }
@@ -115,9 +123,9 @@ public class InventoryController{
         Connection con = DBConnector.getConnection();
         String query = "SELECT * FROM Stock WHERE Style = ? AND Color = ? AND Size = ?";
         PreparedStatement prepStmt = con.prepareStatement(query);
-        prepStmt.setString(1, styleCombo.getEditor().getText());
-        prepStmt.setString(2, colorCombo.getEditor().getText());
-        prepStmt.setString(3, sizeCombo.getEditor().getText());
+        prepStmt.setString(1, styleCombo.getEditor().getText().strip());
+        prepStmt.setString(2, colorCombo.getEditor().getText().strip());
+        prepStmt.setString(3, sizeCombo.getEditor().getText().strip());
         ResultSet rs = prepStmt.executeQuery();
         if(!rs.isBeforeFirst()){
             con.close();
@@ -140,8 +148,8 @@ public class InventoryController{
         Connection con = DBConnector.getConnection();
         String query = "SELECT * FROM Stock WHERE Style = ? AND Color = ?";
         PreparedStatement prepStmt = con.prepareStatement(query);
-        prepStmt.setString(1, styleCombo.getEditor().getText());
-        prepStmt.setString(2, colorCombo.getEditor().getText());
+        prepStmt.setString(1, styleCombo.getEditor().getText().strip());
+        prepStmt.setString(2, colorCombo.getEditor().getText().strip());
         ResultSet rs = prepStmt.executeQuery();
         if(!rs.isBeforeFirst()){
             con.close();
@@ -165,8 +173,8 @@ public class InventoryController{
         Connection con = DBConnector.getConnection();
         String query = "SELECT * FROM Stock WHERE Style = ? AND Size = ?";
         PreparedStatement prepStmt = con.prepareStatement(query);
-        prepStmt.setString(1, styleCombo.getEditor().getText());
-        prepStmt.setString(2, sizeCombo.getEditor().getText());
+        prepStmt.setString(1, styleCombo.getEditor().getText().strip());
+        prepStmt.setString(2, sizeCombo.getEditor().getText().strip());
         ResultSet rs = prepStmt.executeQuery();
         if(!rs.isBeforeFirst()){
             con.close();
@@ -190,8 +198,8 @@ public class InventoryController{
         Connection con = DBConnector.getConnection();
         String query = "SELECT * FROM Stock WHERE Color = ? AND Size = ?";
         PreparedStatement prepStmt = con.prepareStatement(query);
-        prepStmt.setString(1, colorCombo.getEditor().getText());
-        prepStmt.setString(2, sizeCombo.getEditor().getText());
+        prepStmt.setString(1, colorCombo.getEditor().getText().strip());
+        prepStmt.setString(2, sizeCombo.getEditor().getText().strip());
         ResultSet rs = prepStmt.executeQuery();
         if(!rs.isBeforeFirst()){
             con.close();
@@ -215,7 +223,7 @@ public class InventoryController{
         Connection con = DBConnector.getConnection();
         String query = "SELECT * FROM Stock WHERE Style = ?";
         PreparedStatement prepStmt = con.prepareStatement(query);
-        prepStmt.setString(1, styleCombo.getEditor().getText());
+        prepStmt.setString(1, styleCombo.getEditor().getText().strip());
         ResultSet rs = prepStmt.executeQuery();
         if(!rs.isBeforeFirst()){
             con.close();
@@ -239,7 +247,7 @@ public class InventoryController{
         Connection con = DBConnector.getConnection();
         String query = "SELECT * FROM Stock WHERE Color = ?";
         PreparedStatement prepStmt = con.prepareStatement(query);
-        prepStmt.setString(1, colorCombo.getEditor().getText());
+        prepStmt.setString(1, colorCombo.getEditor().getText().strip());
         ResultSet rs = prepStmt.executeQuery();
         if(!rs.isBeforeFirst()){
             con.close();
@@ -263,7 +271,7 @@ public class InventoryController{
         Connection con = DBConnector.getConnection();
         String query = "SELECT * FROM Stock WHERE Size = ?";
         PreparedStatement prepStmt = con.prepareStatement(query);
-        prepStmt.setString(1, sizeCombo.getEditor().getText());
+        prepStmt.setString(1, sizeCombo.getEditor().getText().strip());
         ResultSet rs = prepStmt.executeQuery();
         if(!rs.isBeforeFirst()){
             con.close();
@@ -305,13 +313,6 @@ public class InventoryController{
     }
 
 
-    //Clear text fields and search history
-    @FXML
-    void clearBtnClick(ActionEvent event) {
-        tableList.clear();
-    }
-
-
     @FXML
     void EditQuantityCell(TableColumn.CellEditEvent event) throws SQLException{
         Stock stockSelected = searchTable.getSelectionModel().getSelectedItem();
@@ -340,10 +341,10 @@ public class InventoryController{
             String query = "INSERT INTO Stock (Style, Color, Size, Quantity) " +
                             "VALUES (?, ?, ?, ?)";
             PreparedStatement prepStmt = con.prepareStatement(query);
-            prepStmt.setString(1, manageStyleCombo.getEditor().getText());
-            prepStmt.setString(2, manageColorCombo.getEditor().getText());
-            prepStmt.setString(3, manageSizeCombo.getEditor().getText());
-            prepStmt.setString(4, manageQuantityCombo.getEditor().getText()); //Int
+            prepStmt.setString(1, manageStyleCombo.getEditor().getText().strip());
+            prepStmt.setString(2, manageColorCombo.getEditor().getText().strip());
+            prepStmt.setString(3, manageSizeCombo.getEditor().getText().strip());
+            prepStmt.setString(4, manageQuantityCombo.getEditor().getText().strip()); //Int
 
             try {
                 prepStmt.executeUpdate();
@@ -380,10 +381,10 @@ public class InventoryController{
             String query = "UPDATE Stock SET Quantity = ? " +
                             "WHERE Style = ? AND Color = ? AND Size = ? ";
             PreparedStatement prepStmt = con.prepareStatement(query);
-            prepStmt.setString(1, manageQuantityCombo.getEditor().getText()); //Int
-            prepStmt.setString(2, manageStyleCombo.getEditor().getText());
-            prepStmt.setString(3, manageColorCombo.getEditor().getText());
-            prepStmt.setString(4, manageSizeCombo.getEditor().getText());
+            prepStmt.setString(1, manageQuantityCombo.getEditor().getText().strip()); //Int
+            prepStmt.setString(2, manageStyleCombo.getEditor().getText().strip());
+            prepStmt.setString(3, manageColorCombo.getEditor().getText().strip());
+            prepStmt.setString(4, manageSizeCombo.getEditor().getText().strip());
 
             try {
                 if((!(prepStmt.executeUpdate() >= 1))){
@@ -428,9 +429,9 @@ public class InventoryController{
                             "AND Style = ? AND Color = ? AND Size = ? ";
 
             PreparedStatement prepStmt = con.prepareStatement(query);
-            prepStmt.setString(1, delStyleCombo.getEditor().getText());
-            prepStmt.setString(2, delColorCombo.getEditor().getText());
-            prepStmt.setString(3, delSizeCombo.getEditor().getText());
+            prepStmt.setString(1, delStyleCombo.getEditor().getText().strip());
+            prepStmt.setString(2, delColorCombo.getEditor().getText().strip());
+            prepStmt.setString(3, delSizeCombo.getEditor().getText().strip());
 
             if ((!(prepStmt.executeUpdate() >= 1))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -464,7 +465,7 @@ public class InventoryController{
             String query = "DELETE FROM Stock WHERE Id = ?";
 
             PreparedStatement prepStmt = con.prepareStatement(query);
-            prepStmt.setString(1, delIdField.getText());
+            prepStmt.setString(1, delIdField.getText().strip());
 
             if ((!(prepStmt.executeUpdate() >= 1))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

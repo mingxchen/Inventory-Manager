@@ -1,6 +1,5 @@
 package InventoryManager;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
@@ -18,7 +17,7 @@ public class DBConnector {
 
         try{
             //getClass().getResourceAsStream() can't be used in static context
-            InputStream inputStream = DBConnector.class.getClassLoader().getResourceAsStream("db.properties");
+            InputStream inputStream = DBConnector.class.getClassLoader().getResourceAsStream("local.properties");
             Properties properties = new Properties();
             properties.load(inputStream);
 
