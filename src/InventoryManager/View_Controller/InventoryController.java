@@ -9,8 +9,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +30,7 @@ public class InventoryController{
     private ComboBox<String> styleCombo, colorCombo, sizeCombo;
 
     @FXML
-    private Button searchBtn;
+    private Button searchBtn, exportBtn;
 
     @FXML
     private TableView<Stock> searchTable;
@@ -69,6 +75,7 @@ public class InventoryController{
             5, 6, 7, 8, 9, 10);
 
 
+    //Preset dropdown list items
     public void initialize(){
         styleCombo.setItems(styleList);
         colorCombo.setItems(colorList);
@@ -87,35 +94,35 @@ public class InventoryController{
     void searchBtnClick(ActionEvent event) throws SQLException{
         if(styleCombo.getEditor().getText().length() != 0 && colorCombo.getEditor().getText().length() != 0 && sizeCombo.getEditor().getText().length() != 0){
             tableList.clear();
-            styleColorSizeSearch();
+            styleColorSizeSearch(); //Search when all three fields are entered
         }
         else if(styleCombo.getEditor().getText().length() != 0 && colorCombo.getEditor().getText().length() != 0 && sizeCombo.getEditor().getText().length() == 0){
             tableList.clear();
-            styleColorSearch();
+            styleColorSearch();     //Search when style and color are entered
         }
         else if(styleCombo.getEditor().getText().length() != 0 && colorCombo.getEditor().getText().length() == 0 && sizeCombo.getEditor().getText().length() != 0){
             tableList.clear();
-            styleSizeSearch();
+            styleSizeSearch();      //Search when style and size are entered
         }
         else if(styleCombo.getEditor().getText().length() == 0 && colorCombo.getEditor().getText().length() != 0 && sizeCombo.getEditor().getText().length() != 0){
             tableList.clear();
-            colorSizeSearch();
+            colorSizeSearch();      //Search when color and size are entered
         }
         else if(styleCombo.getEditor().getText().length() != 0 && colorCombo.getEditor().getText().length() == 0 && sizeCombo.getEditor().getText().length() == 0){
             tableList.clear();
-            styleSearch();
+            styleSearch();          //Search when style is entered
         }
         else if(styleCombo.getEditor().getText().length() == 0 && colorCombo.getEditor().getText().length() != 0 && sizeCombo.getEditor().getText().length() == 0){
             tableList.clear();
-            colorSearch();
+            colorSearch();          //Search when color is entered
         }
         else if(styleCombo.getEditor().getText().length() == 0 && colorCombo.getEditor().getText().length() == 0 && sizeCombo.getEditor().getText().length() != 0){
             tableList.clear();
-            sizeSearch();
+            sizeSearch();           //Search when size is entered
         }
         else{
             tableList.clear();
-            allSearch();
+            allSearch();            //Search when nothing is entered
         }
     }
 
@@ -313,6 +320,41 @@ public class InventoryController{
     }
 
 
+    //Export data from tableview to .csv file
+    @FXML
+    void exportBtnClick() throws Exception{
+        ObservableList<Stock> stocks = searchTable.getItems();
+        Writer writer = null;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialFileName("Stocks");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(".csv", ".csv"));
+
+        try{
+            File file = fileChooser.showSaveDialog(new Stage());
+            writer = new BufferedWriter(new FileWriter(file));
+            writer.write("ID, Style, Color, Size, Quantity, \n");
+
+            for(Stock s : stocks){
+                String text = s.getId() + "," + s.getStyle() + "," + s.getColor() + "," +
+                        s.getSize()  + "," + s.getQuantity() + "\n";
+                writer.write(text);
+            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Data successfully exported!");
+            alert.showAndWait();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            writer.flush();
+            writer.close();
+        }
+    }
+
+
+    //Edit quantity cell when double clicked
     @FXML
     void EditQuantityCell(TableColumn.CellEditEvent event) throws SQLException{
         Stock stockSelected = searchTable.getSelectionModel().getSelectedItem();
@@ -332,6 +374,7 @@ public class InventoryController{
     }
 
 
+    //Add Stock by descriptions to the database
     @FXML
     void addBtnClick(ActionEvent event) throws SQLException{
         if(manageStyleCombo.getEditor().getText().length() != 0 && manageColorCombo.getEditor().getText().length() != 0 &&
@@ -372,6 +415,7 @@ public class InventoryController{
     }
 
 
+    //Edit Stock by descriptions to the database
     @FXML
     void editBtnClick() throws SQLException{
         if(manageStyleCombo.getEditor().getText().length() != 0 && manageColorCombo.getEditor().getText().length() != 0 &&
@@ -387,7 +431,7 @@ public class InventoryController{
             prepStmt.setString(4, manageSizeCombo.getEditor().getText().strip());
 
             try {
-                if((!(prepStmt.executeUpdate() >= 1))){
+                if((!(prepStmt.executeUpdate() >= 1))){     //If less than 1 row affected
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText(null);
                     alert.setContentText("Invalid Edit, Item not in Stock!");
@@ -419,6 +463,7 @@ public class InventoryController{
     }
 
 
+    //Delete Stock by descriptions from the database
     @FXML
     void deleteBtnClick(ActionEvent event) throws SQLException{
         if(delStyleCombo.getEditor().getText().length() != 0 && delColorCombo.getEditor().getText().length() != 0
@@ -457,6 +502,7 @@ public class InventoryController{
     }
 
 
+    //Delete Stock by ID from the database
     @FXML
     void deleteByIdClick(ActionEvent event) throws SQLException{
         if(delIdField.getText().length() != 0){
