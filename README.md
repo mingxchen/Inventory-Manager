@@ -1,5 +1,5 @@
 ## Inventory-Manager
-A GUI program that utilizes cloud database to keep track of clothing inventory for an online clothing store.
+A GUI desktop application that utilizes cloud database to keep track of clothing inventory for an online store on Etsy.com.
 
 
 ## Tools used:
